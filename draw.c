@@ -27,6 +27,10 @@
 void add_sphere( struct matrix * points, 
 		 double cx, double cy, double r, 
 		 double step ) {
+
+  struct matrix * m = new_matrix(4,4);
+  ident(m);
+  m->m[1][0] = 
   
 }
 
