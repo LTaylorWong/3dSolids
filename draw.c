@@ -27,7 +27,13 @@
 void add_sphere( struct matrix * points, 
 		 double cx, double cy, double r, 
 		 double step ) {
-
+  theta = theta * M_PI / 180;
+  struct matrix * m = new_matrix(4,4);
+  ident(m);
+  m->m[1][1] = cos(theta);
+  m->m[1][2] = sin(theta) * -1;
+  m->m[2][1] = sin(theta);
+  m->m[2][2] = cos(theta);
   
 }
 
