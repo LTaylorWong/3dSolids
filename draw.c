@@ -50,6 +50,7 @@ void add_sphere( struct matrix * points,
 void generate_sphere( struct matrix * points, 
 		      double cx, double cy, double r, 
 		      double step ) {
+  theta = theta * M_PI / 180;
   struct matrix * m = new_matrix(4,4);
   ident(m);
   m->m[1][0] = 
