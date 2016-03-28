@@ -56,22 +56,14 @@ void add_sphere( struct matrix * points,
 void generate_sphere( struct matrix * points, 
 		      double cx, double cy, double r, 
 		      double step ) {
-  /* theta = theta * M_PI / 180;
-  struct matrix * m = new_matrix(4,4);
-  ident(m);
-  m->m[1][1] = cos(theta);
-  m->m[1][2] = sin(theta) * -1;
-  m->m[2][1] = sin(theta);
-  m->m[2][2] = cos(theta);
-  
-  struct matrix * m = new_matrix(4,1);
-  m->m[0][0] = rcos(theta);
-  m->m[1][0] = rsin(theta);
-  m->m[2][0] = 0;
-  m->m[3][0] = 1;
-  
-  matrix_mult(points, m);
-  */
+  for(p = 0; p < 1.00001; p += 1.0/step){
+    for (t = 0; t < 1.00001; t += 1.0/step){
+      x = r * cos(M_PI*t) + cx;
+      y = r * sin(M_PI*t) * cos(2*M_PI*p) + cy;
+      z = r * sin(M_PI*t) * sin(2*M_PI*p);
+      add_point(points,x,y,z);
+    }
+  }
 }    
 
 /*======== void add_torus() ==========
