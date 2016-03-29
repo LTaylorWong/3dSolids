@@ -89,7 +89,7 @@ void add_torus( struct matrix * points,
 		double cx, double cy, double r1, double r2, 
 		double step ) {
   struct matrix * temp = new_matrix(4,1);
-  generate_torus(temp,cx,cy,r,step);
+  generate_torus(temp,cx,cy,r1,r2,step);
   int i;
   for(i = 0; i < temp->lastcol; i++){
     add_edge(points, temp->m[0][i], temp->m[1][i],temp->m[2][i],
