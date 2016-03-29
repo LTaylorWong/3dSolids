@@ -65,7 +65,8 @@ void generate_sphere( struct matrix * points,
       add_point(points,x,y,z);
     }
   }
-}    
+}
+
 
 /*======== void add_torus() ==========
   Inputs:   struct matrix * points
@@ -122,6 +123,8 @@ void generate_torus( struct matrix * points,
       x = (r1 * sin(2 * M_PI * t) + r2) * cos(2 * M_PI * p) + cx;
       z = (r1 * sin(2 * M_PI * t) + r2) * sin(2 * M_PI * p); // + cz;
       add_edge(points, x, y, z, x, y, z);
+    }
+  }
 }
 
 /*======== void add_box() ==========
@@ -418,4 +421,5 @@ void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
       }
     }
   }
-
+}
+  
