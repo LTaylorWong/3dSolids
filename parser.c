@@ -123,7 +123,23 @@ void parse_file ( char * filename,
 	     &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
       add_curve(pm, x1, y1, x2, y2, x3, y3, x4, y4, 0.01, HERMITE_MODE );
       //printf( "%lf %lf %lf\n", x, y, z);
-    }    
+    }
+    else if ( strncmp(line, "box", strlen(line)) == 0 ) {
+      fgets(line, 255, f);
+      sscanf(line, "%lf %lf %lf %lf %lf %lf", &x, &y, &z, &x1, &y1, &z1);
+      add_box(pm, x, y, z, x1, y1, z1);
+    }
+    else if ( strncmp(line, "sphere", strlen(line)) == 0 ){
+      fgets(line, 255, f);
+      sscanf(line, "%lf %lf %lf", &x, &y, &r1);
+      double step = 20;
+      generate_sphere(pm, x, y, r1, step);
+    }
+    else if ( strncmp(line, "torus", strlen(line)) == 0 ){
+      fgets(line, 255, f);
+      sscanf(line, "%lf %lf %lf %lf", &x, &y, &r1, &r2);
+      double step = 100;
+      generate_torus(pm, x, y, r1, r2, step);
     else if ( strncmp(line, "scale", strlen(line)) == 0 ) {
       //printf("SCALE\n");
       fgets(line, 255, f);
