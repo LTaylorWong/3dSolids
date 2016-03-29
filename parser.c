@@ -89,7 +89,7 @@ void parse_file ( char * filename,
   while ( fgets(line, 255, f) != NULL ) {
     line[strlen(line)-1]='\0';
     //printf(":%s:\n",line);
-    double x, y, z, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
+    double x, y, z, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, r1, r2;
    
     
     if ( strncmp(line, "line", strlen(line)) == 0 ) {
@@ -140,6 +140,7 @@ void parse_file ( char * filename,
       sscanf(line, "%lf %lf %lf %lf", &x, &y, &r1, &r2);
       double step = 100;
       generate_torus(pm, x, y, r1, r2, step);
+    }
     else if ( strncmp(line, "scale", strlen(line)) == 0 ) {
       //printf("SCALE\n");
       fgets(line, 255, f);
