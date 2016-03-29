@@ -57,8 +57,8 @@ void generate_sphere( struct matrix * points,
 		      double cx, double cy, double r, 
 		      double step ) {
   double p,t,x,y,z;
-  for(p = 0; p < 1.00001; p += 1.0/step){
-    for (t = 0; t < 1.00001; t += 1.0/step){
+  for(p = 0; p < 1; p += 1/step){
+    for (t = 0; t < 1; t += 1/step){
       x = r * cos(M_PI*t) + cx;
       y = r * sin(M_PI*t) * cos(2*M_PI*p) + cy;
       z = r * sin(M_PI*t) * sin(2*M_PI*p);
@@ -88,6 +88,13 @@ void generate_sphere( struct matrix * points,
 void add_torus( struct matrix * points, 
 		double cx, double cy, double r1, double r2, 
 		double step ) {
+  struct matrix * temp = new_matrix(4,1);
+  generate_torus(temp,cx,cy,r,step);
+  int i;
+  for(i = 0; i < temp->lastcol; i++){
+    add_edge(points, temp->m[0][i], temp->m[1][i],temp->m[2][i],
+	     temp->m[0][i], temp->m[1][i],temp->m[2][i]);
+  }
 }
 
 /*======== void generate_torus() ==========
@@ -108,6 +115,13 @@ void add_torus( struct matrix * points,
 void generate_torus( struct matrix * points, 
 		     double cx, double cy, double r1, double r2, 
 		     double step ) {
+  double p, t,x,y,z;
+  for(p = 0; p < 1; p+=1/step){
+    for(t = 0; t < 1; t+=1/step){
+      y = r1 * cos(2 * M_PI * t) + cy;
+      x = (r1 * sin(2 * M_PI * t) + r2) * cos(2 * M_PI * p) + cx;
+      z = (r1 * sin(2 * M_PI * t) + r2) * sin(2 * M_PI * p); // + cz;
+      add_edge(points, x, y, z, x, y, z);
 }
 
 /*======== void add_box() ==========
@@ -129,6 +143,14 @@ void generate_torus( struct matrix * points,
 void add_box( struct matrix * points,
 	      double x, double y, double z,
 	      double width, double height, double depth ) {
+  add_edge(points, x, y, z, x, y, z);
+  add_edge(points, x+width, y, z, x+width, y, z);
+  add_edge(points, x+width, y-height, z, x+width, y-height, z);
+  add_edge(points, x, y-height, z, x, y-height, z);
+  add_edge(points, x, y-height, z-depth, x, y-height, z-depth);
+  add_edge(points, x+width, y-height, z-depth, x+width, y-height, z-depth);
+  add_edge(points, x+width, y, z-depth, x+width, y, z-depth);
+  add_edge(points, x, y, z-depth, x, y, z-depth);
 }
   
 /*======== void add_circle() ==========
